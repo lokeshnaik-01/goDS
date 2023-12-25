@@ -15,6 +15,13 @@ func main() {
 	transformFn1 := getTransformerFunction(&a)
 	c := transformNumber(a, transformFn1)
 	fmt.Println(c)
+
+	// anonymous function function type should match as the one used in other place
+	// function is declared at the point of declaration itself
+	d := transformNumber(a, func (number int) int {
+		return number*5
+	})
+	fmt.Println(d)
 }
 
 func transformNumber(a []int, transform func(int) int) []int {
