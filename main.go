@@ -22,6 +22,10 @@ func main() {
 		return number*5
 	})
 	fmt.Println(d)
+
+
+	e:=transformNumber(a, createTransformer(10))
+	fmt.Println(e)
 }
 
 func transformNumber(a []int, transform func(int) int) []int {
@@ -47,4 +51,12 @@ func getTransformerFunction(numbers *[]int) transformFn {
 	} else {
 		return triple
 	}
+}
+
+
+func createTransformer(factor int) func(int) int {
+	return func(number int) int {
+		return number*factor
+	}
+	
 }
