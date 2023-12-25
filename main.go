@@ -4,11 +4,17 @@ import (
 	"fmt"
 )
 
+type transformFn func(int) int
+
 func main() {
 	a := []int {1,2,3}
 	b := transformNumber(a, double)
 	b = transformNumber(b, triple)
 	fmt.Println(b)
+
+	transformFn1 := getTransformerFunction(&a)
+	c := transformNumber(a, transformFn1)
+	fmt.Println(c)
 }
 
 func transformNumber(a []int, transform func(int) int) []int {
@@ -26,4 +32,12 @@ func double(number int) int {
 }
 func triple(number int) int {
 	return number*3
+}
+
+func getTransformerFunction(numbers *[]int) transformFn {
+	if(*numbers)[0] == 1 {
+		return double
+	} else {
+		return triple
+	}
 }
