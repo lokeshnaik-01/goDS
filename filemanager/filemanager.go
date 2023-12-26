@@ -30,7 +30,7 @@ func (fm FileManager) ReadLines() ([]string, error){
 	return lines, nil
 }
 
-func (fm FileManager)WriteJson(data interface{}) error{
+func (fm FileManager) WriteResult(data interface{}) error{
 	file, err := os.Create(fm.OutPutFilePath)
 	if err != nil {
 		return errors.New("failed to create file")
