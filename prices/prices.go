@@ -8,10 +8,10 @@ import (
 )
 
 type TaxIncludedPriceJob struct {
-	IOManager iomanager.IOManager `json:"-"` // it wil be ignored
-	TaxRate float64 `json:"tax_rate"`
-	InputPrices []float64 `json:"input_prices"`
-	TaxIncludedPrices map[string]string `json:"tax_included_prices"`
+	IOManager         iomanager.IOManager `json:"-"`
+	TaxRate           float64             `json:"tax_rate"`
+	InputPrices       []float64           `json:"input_prices"`
+	TaxIncludedPrices map[string]string   `json:"tax_included_prices"`
 }
 
 func (job *TaxIncludedPriceJob) LoadData() {
@@ -37,7 +37,7 @@ func (job *TaxIncludedPriceJob) Process() {
 		result[fmt.Sprintf("%2.f", price)] = fmt.Sprintf("%.2f", taxIncludedPrice)
 	}
 	job.TaxIncludedPrices = result
-	err := job.IOManager.WriteJson(job)
+	err := job.IOManager.WriteResult(job)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -50,4 +50,3 @@ func NewTaxIncludedPriceJob(iom iomanager.IOManager, taxRate float64) *TaxInclud
         TaxRate:     taxRate,
     }
 }
-
